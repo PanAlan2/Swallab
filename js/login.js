@@ -6,35 +6,41 @@ let getUser = async () => {
     // console.log(data);
     return data
 }
-
-let info = await getUser();
-console.log(info);
-
-const user = info.r_id;
-console.log(user);
-// 判斷是否登日後，顯示哪個按鈕
-if (user) {
-    $('#login').addClass('d-none');
-    $('#logout').removeClass('d-none');
-} else {
-    $('#login').removeClass('d-none');
-    $('#logout').addClass('d-none');
+let getUserInfos = async () => {
+    let info = await getUser();
+    console.log(info);
+    
+    const user = info.r_id;
+    console.log(user);
+    // 判斷是否登日後，顯示哪個按鈕
+    if (user) {
+        $('#login').addClass('d-none');
+        $('#logout').removeClass('d-none');
+    } else {
+        $('#login').removeClass('d-none');
+        $('#logout').addClass('d-none');
+    }
+    const role = info.role;
+    const name = info.name;
+    localStorage.setItem('user_id', user);
+    localStorage.setItem('role', user);
+    $('#userName').text(name);
+    console.log(name);
 }
-const role = info.role;
-const name = info.name;
-localStorage.setItem('user_id', user);
-localStorage.setItem('role', user);
-$('#userName').text(name);
-console.log(name);
-
+await getUserInfos();
 // 登入
 $('#login').on('click', () => {
     const redirectUrl = window.location.href;
     console.log(redirectUrl);
-    
+
     window.location.href = `http://localhost/MySwallab/public/login?redirectUrl=${encodeURIComponent(redirectUrl)}`;
 })
 // 登出
-$('#logout').on('click' , () => {
+$('#logout').on('click', async () => {
     localStorage.clear();
+    let response = await fetch('http://localhost/MySwallab/public/logout');
+    let result = await response.json();
+    console.log(result);
+    
+    let info = await getUserInfos();
 })

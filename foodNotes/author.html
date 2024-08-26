@@ -105,9 +105,13 @@
                     </div>
                 </form>
                 <!-- 登入及註冊按鈕 -->
-                <div class="ms-3 me-5 col-1" style="color:#8B4513;font-weight: bold;">
-                    David
-                </div>
+                <div class="ms-3 me-5 col-1 d-flex text-nowrap">
+                  <h5 id="userName"></h5>
+                  <a href="#" class="">
+                      <button id="login" class="btn btn-sm btnLogin text-nowrap">登入/註冊</button>
+                      <button id="logout" class="d-none btn btn-sm btnLogin text-nowrap">登出</button>
+                  </a>
+              </div>
             </div>
         </div>
     </nav>
@@ -252,6 +256,7 @@
         </div>
     </footer>
 
+    <script type="module" src="../js/login.js"></script>
     <script src="../js/bootstrap.bundle.js"></script>
     <script src="../js/jquery-3.7.1.js"></script>
     <script src="../js/author.js"></script>
